@@ -2,6 +2,15 @@ name: Build APK
 
 on:
   workflow_dispatch:
+    inputs:
+      variant:
+        description: 'Build variant'
+        required: true
+        default: 'Debug'
+        type: choice
+        options:
+          - Debug
+          - Release
   workflow_call:
     inputs:
       variant:
