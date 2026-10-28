@@ -191,6 +191,17 @@ androidComponents {
                                 }
                             }
                         }
+                        File(assetsDir, "runtimes/jna").listFiles()?.forEach { versionDir ->
+                            val nativesDir = File(versionDir, "natives")
+                            if (nativesDir.isDirectory) {
+                                nativesDir.listFiles()?.forEach { dir ->
+                                    if (dir.isDirectory && dir.name != abi) {
+                                        logger.lifecycle("Removing non-target-arch JNA natives: $dir")
+                                        dir.deleteRecursively()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
